@@ -1,32 +1,52 @@
 import React from 'react';
-import useFetch from './useFetch';
+import Checkbox from './Checkbox';
+import Input from './Form/Input';
+import Radio from './Form/Radio';
+import Select from './Form/Select';
 
 const App = () => {
-  const { request, data, loading, error } = useFetch();
+  const [nome, setNome] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [produto, setProduto] = React.useState('');
+  const [cor, setCor] = React.useState('');
+  const [frutas, setFrutas] = React.useState('');
+  const [linguagens, setLinguagens] = React.useState([]);
+  const [termos, setTermos] = React.useState([]);
 
-  React.useEffect(() => {
-    async function fetchData() {
-      const { response, json } = await request(
-        'https://ranekapi.origamid.dev/json/api/produto/',
-      );
-      console.log(response, json);
-    }
-    fetchData();
-  }, [request]);
-
-  if (error) return <p>{error}</p>;
-  if (loading) return <p>Carregando...</p>;
-  if (data)
-    return (
-      <div>
-        {data.map((produto) => (
-          <div key={produto.id}>
-            <h1>{produto.nome}</h1>
-          </div>
-        ))}
-      </div>
-    );
-  else return null;
+  return (
+    <form>
+      <h2>Termos</h2>
+      <Checkbox
+        options={['Li e aceito os Termos.']}
+        value={termos}
+        setValue={setTermos}
+      />
+      <h2>Checkboxes</h2>
+      <Checkbox
+        options={['JS', 'PHP', 'SQL']}
+        value={linguagens}
+        setValue={setLinguagens}
+      />
+      <h2>Cores</h2>
+      <Radio options={['azul', 'vermelho']} value={cor} setValue={setCor} />
+      <h2>Frutas</h2>
+      <Radio options={['Maçã', 'Goiaba']} value={frutas} setValue={setFrutas} />
+      <Select
+        options={['smartphone', 'tablet']}
+        value={produto}
+        setValue={setProduto}
+      />
+      <Input id="nome" label="Nome" value={nome} setValue={setNome} />
+      <Input
+        id="email"
+        label="Email"
+        value={email}
+        setValue={setEmail}
+        required
+      />
+      <button>Enviar</button>
+    </form>
+  );
 };
 
 export default App;

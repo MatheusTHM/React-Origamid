@@ -1,11 +1,18 @@
 import React from 'react';
 
-const Input = ({ label, id, ...props }) => {
+const Input = ({ id, label, setValue, value, ...props }) => {
   return (
-    <div style={{ margin: '1rem 0' }}>
+    <>
       <label htmlFor={id}>{label}</label>
-      <input id={id} type="text" {...props} />
-    </div>
+      <input
+        type="text"
+        id={id}
+        name={id}
+        value={value}
+        onChange={({ target }) => setValue(target.value)}
+        {...props}
+      />
+    </>
   );
 };
 
