@@ -1,0 +1,12 @@
+.produto {
+  max-width: 25%;
+  margin: 0 5%;
+  display: inline-block;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+img {
+  border-radius: 20px;
+  max-width: 100%;
+}
